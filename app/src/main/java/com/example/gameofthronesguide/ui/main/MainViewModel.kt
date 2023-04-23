@@ -1,4 +1,10 @@
 package com.example.gameofthronesguide.ui.main
 
-class MainViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.gameofthronesguide.persistence.CharacterRepository
+
+class MainViewModel(private val characterRepository: CharacterRepository): ViewModel() {
+    fun getCharacters(){
+        return characterRepository.getCharacters()
+    }
 }

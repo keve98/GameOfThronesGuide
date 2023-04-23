@@ -1,15 +1,6 @@
 package com.example.gameofthronesguide.persistence
 
-import androidx.lifecycle.MutableLiveData
-
-class CharacterDao {
-    private val characterList = mutableListOf<Character>()
-    private val characters = MutableLiveData<List<Character>>()
-
-    init {
-        characters.value = characterList
-    }
-
+class CharacterRepository private constructor(private val characterDao: CharacterDao) {
     fun addCharacter(character: Character){
         throw NotImplementedError()
     }

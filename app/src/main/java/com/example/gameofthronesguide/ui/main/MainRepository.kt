@@ -1,4 +1,6 @@
 package com.example.gameofthronesguide.ui.main
 
-class MainRepository {
+
+class MainRepository{
+
 }
