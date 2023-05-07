@@ -18,4 +18,8 @@ object RestApiClient {
             }
             return this.retrofit!!
         }
+
+    fun createRestApiInterface(retrofit: Retrofit): CharacterService{
+        return retrofit.create(CharacterService::class.java)
+    }
 }

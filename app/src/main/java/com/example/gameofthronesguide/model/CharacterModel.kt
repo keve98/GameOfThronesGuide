@@ -1,6 +1,6 @@
 package com.example.gameofthronesguide.model
 
-class Character(
+class CharacterModel(
     val id: Int,
     val firstName: String,
     val lastName: String,
