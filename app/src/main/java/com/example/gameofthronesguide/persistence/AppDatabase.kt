@@ -1,15 +1,10 @@
 package com.example.gameofthronesguide.persistence
 
-class AppDatabase private constructor(){
-    var characterDao = CharacterDao()
-        private set
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.example.gameofthronesguide.model.CharacterEntity
 
-    companion object {
-        @Volatile private var instance: AppDatabase? = null
-
-        fun getInstance() =
-            instance ?: synchronized(this) {
-                instance ?: AppDatabase().also { instance = it }
-            }
-    }
+@Database(entities = [CharacterEntity::class], version = 1)
+abstract class AppDatabase : RoomDatabase(){
+    abstract fun characterDao() : CharacterDao
 }
