@@ -1,31 +1,56 @@
 package com.example.gameofthronesguide.ui.main
 
-import androidx.annotation.WorkerThread
+import com.example.gameofthronesguide.di.NetworkModule
 import com.example.gameofthronesguide.model.CharacterEntity
 import com.example.gameofthronesguide.network.CharacterService
 import com.example.gameofthronesguide.persistence.CharacterDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
-import timber.log.Timber
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
 import javax.inject.Inject
 
-class CharacterRepository @Inject constructor(private val characterDao: CharacterDao, private val characterService: CharacterService) {
+class CharacterRepository /*@Inject constructor(private val characterService: CharacterService, private val characterDao: CharacterDao)*/ {
 
-    init{
-        Timber.d("Injection CharacterRepository")
+    private val characterService = NetworkModule.client.create(CharacterService::class.java)
+
+    fun getCharacters():List<Character>? {
+        var characters=characterService.getCharacters()
+        var characterList : List<Character>? = null
+        characters.enqueue(object : Callback<List<Character>> {
+            override fun onResponse(call: Call<List<Character>>, response: Response<List<Character>>            ) {
+                if (response.isSuccessful) {
+                    val characters = response.body()
+                    characterList = response.body()
+                    // A karakterek további kezelése
+                    characters?.forEach { character ->
+                        println(character)
+                    }
+                } else {
+                    // Kezelés, ha a kérés nem sikerült
+                    println("Hiba történt a hálózati kérés során.")
+                }
+            }
+
+
+            override fun onFailure(call: Call<List<Character>>, t: Throwable) {
+                // Hiba kezelése
+                println("Hiba történt a hálózati kérés során: ${t.message}")
+            }
+        })
+        return characterList
     }
 
-    @WorkerThread
-    fun loadCharacters(
-        onStart: () -> Unit,
-        onCompletion: () -> Unit,
-        onError: (String) -> Unit
-    ) = flow {
-        val characters: List<CharacterEntity> = characterDao.getAllCharacters()
-        emit(characters)
-    }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
-
+//    init {
+//        val characters = getCharacters()
+//        GlobalScope.launch {
+//        for(c in characters){
+//            var l = characterDao.insertCharacter(c)
+//            print(c.fullName)
+//            }
+//        }
+//    }
 }

@@ -2,18 +2,19 @@ package com.example.gameofthronesguide.network
 
 import com.example.gameofthronesguide.model.CharacterEntity
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface CharacterService {
-    @GET("api/v2/characters")
-    fun getCharacters(): Call<CharacterEntity>
+    @GET("characters")
+    fun getCharacters(): Call<List<Character>>
 
-    @GET("api/v2/Characters/{id}")
+    @GET("characters/{id}")
     fun getCharacterDetails(@Path("id") id: String): Call<CharacterEntity>
 
-    @POST("api/v2/characters")
+    @POST("characters")
     fun addCharacter(@Body character: CharacterEntity)
 }

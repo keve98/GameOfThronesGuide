@@ -15,6 +15,7 @@ class CharacterAdapter(private val characters: List<CharacterEntity>, private va
     fun ViewGroup.inflate(layoutRes: Int): View {
         return LayoutInflater.from(context).inflate(layoutRes, this, false)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflate(R.layout.character_card))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(characters[position], listener)
@@ -30,6 +31,7 @@ class CharacterAdapter(private val characters: List<CharacterEntity>, private va
                 .centerCrop()
                 .dontAnimate()
                 .override(333, 500) // To allow parallax effect
+                //.into(iv_bg)
 
             setOnClickListener { listener(item) }
         }

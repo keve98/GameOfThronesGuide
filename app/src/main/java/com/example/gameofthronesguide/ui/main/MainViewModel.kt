@@ -6,17 +6,21 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.gameofthronesguide.model.CharacterEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val characterRepository: CharacterRepository): ViewModel() {
-    val characters: Flow<List<CharacterEntity>>
-        get() = characterRepository.loadCharacters(
-            onStart = { _isLoading.value = true },
-            onCompletion = { _isLoading.value = false },
-            onError = { Timber.d(it) }
-        )
+//@HiltViewModel
+class MainViewModel /*@Inject constructor(private val characterRepository: CharacterRepository)*/: ViewModel() {
+
+    private val characterRepository : CharacterRepository = CharacterRepository()
+
+    fun getCharacters() : List<Character>?{
+       return characterRepository.getCharacters()
+    }
+
+/*
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: State<Boolean> get() = _isLoading
@@ -26,9 +30,12 @@ class MainViewModel @Inject constructor(private val characterRepository: Charact
 
     init {
         Timber.d("injection MainViewModel")
+
     }
 
     fun selectTab(@StringRes tab: Int) {
         _selectedTab.value = tab
-    }
+    }*/
+
+
 }

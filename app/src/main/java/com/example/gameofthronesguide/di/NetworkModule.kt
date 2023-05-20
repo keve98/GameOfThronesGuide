@@ -1,48 +1,43 @@
 package com.example.gameofthronesguide.di
 
-import android.content.Context
-import android.os.Build
-import coil.ImageLoader
-//import coil.decode.ImageDecoderDecoder
 import com.example.gameofthronesguide.network.CharacterService
-import com.example.gameofthronesguide.network.RequestInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
+//@Module
+//@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    private const val BASE_URL = "https://thronesapi.com/api/v2/"
+    private var mRetrofit: Retrofit? = null
+
+    val client: Retrofit
+        get() {
+            if (mRetrofit == null) {
+                mRetrofit = Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+            }
+            return this.mRetrofit!!
+        }
+
+
+/*
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient{
         return OkHttpClient.Builder()
-            .addInterceptor(RequestInterceptor())
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideImageLoader(
-        @ApplicationContext context: Context,
-        okHttpClient: OkHttpClient
-    ): ImageLoader {
-        return ImageLoader.Builder(context)
-            .okHttpClient { okHttpClient }
-           /* .components {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    add(ImageDecoderDecoder.Factory())
-                }
-            }*/
-            .build()
-    }
 
     @Provides
     @Singleton
@@ -50,17 +45,16 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                "https://thronesapi.com/api/v2/Characters"
+                "https://thronesapi.com/"
             )
-            .addConverterFactory(GsonConverterFactory.create())
-            //.addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideDisneyService(retrofit: Retrofit): CharacterService {
+    fun provideCharacterService(retrofit: Retrofit): CharacterService {
         return retrofit.create(CharacterService::class.java)
     }
-
+*/
 }

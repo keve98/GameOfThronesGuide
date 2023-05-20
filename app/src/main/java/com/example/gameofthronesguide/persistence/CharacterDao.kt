@@ -13,9 +13,8 @@ interface CharacterDao {
     @Query("SELECT * FROM CHARACTERS")
     fun getAllCharacters(): List<CharacterEntity>
 
-    @Query("SELECT * FROM characters WHERE id = :id_")
-    suspend fun getCharacter(id_: Long): CharacterEntity?
-
+   /* @Query("SELECT * FROM characters WHERE id = :id_")
+    suspend fun getCharacter(id_: Long): CharacterEntity?*/
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacter(characterEntity: CharacterEntity) : Long
