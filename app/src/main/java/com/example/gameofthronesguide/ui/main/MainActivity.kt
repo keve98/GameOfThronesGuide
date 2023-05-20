@@ -28,35 +28,37 @@ import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 import res.*
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel : MainViewModel by viewModels()
+    private var adapter: CharacterAdapter?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var characters = mainViewModel.getCharacters()
         if(characters == null){
-            characters = readJsonFileToList("src/main/got.json")
+            characters = readJsonFileToList("got.json")
         }
         setContentView(R.layout.activity_main)
 
         listRecyclerView!!.layoutManager = GridLayoutManager(this, 2)
 
-      /*  adapter = CharacterAdapter(characterDao.getAllCharacters()) {
+        adapter = CharacterAdapter(characters) {
             val intent = Intent(this, CharacterDetailsActivity::class.java)
             //intent.putExtra(CharacterDetailsActivity.CHARACTER, it)
             startActivity(intent)
         }
-        listRecyclerView!!.adapter = adapter*/
+        listRecyclerView!!.adapter = adapter
 
     }
 
-    fun <T> readJsonFileToList(filePath: String): List<T> {
+    fun readJsonFileToList(filePath: String): List<CharacterEntity> {
         val file = File(filePath)
-        val json = file.readText()
-        val listType = object : TypeToken<List<T>>() {}.type
+        val json = assets.open(filePath).bufferedReader().use { it.readText() }
+        val listType = object : TypeToken<List<CharacterEntity>>() {}.type
         return Gson().fromJson(json, listType)
     }
 

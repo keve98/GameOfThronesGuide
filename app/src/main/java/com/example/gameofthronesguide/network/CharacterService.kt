@@ -10,7 +10,7 @@ import retrofit2.http.Path
 
 interface CharacterService {
     @GET("characters")
-    fun getCharacters(): Call<List<Character>>
+    fun getCharacters(): Call<List<CharacterEntity>>
 
     @GET("characters/{id}")
     fun getCharacterDetails(@Path("id") id: String): Call<CharacterEntity>

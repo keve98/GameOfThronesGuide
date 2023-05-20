@@ -16,7 +16,7 @@ class MainViewModel /*@Inject constructor(private val characterRepository: Chara
 
     private val characterRepository : CharacterRepository = CharacterRepository()
 
-    fun getCharacters() : List<Character>?{
+    fun getCharacters() : List<CharacterEntity>?{
        return characterRepository.getCharacters()
     }
 

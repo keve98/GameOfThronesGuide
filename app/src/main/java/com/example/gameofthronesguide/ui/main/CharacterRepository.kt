@@ -17,11 +17,11 @@ class CharacterRepository /*@Inject constructor(private val characterService: Ch
 
     private val characterService = NetworkModule.client.create(CharacterService::class.java)
 
-    fun getCharacters():List<Character>? {
+    fun getCharacters():List<CharacterEntity>? {
         var characters=characterService.getCharacters()
-        var characterList : List<Character>? = null
-        characters.enqueue(object : Callback<List<Character>> {
-            override fun onResponse(call: Call<List<Character>>, response: Response<List<Character>>            ) {
+        var characterList : List<CharacterEntity>? = null
+        characters.enqueue(object : Callback<List<CharacterEntity>> {
+            override fun onResponse(call: Call<List<CharacterEntity>>, response: Response<List<CharacterEntity>>            ) {
                 if (response.isSuccessful) {
                     val characters = response.body()
                     characterList = response.body()
@@ -36,7 +36,7 @@ class CharacterRepository /*@Inject constructor(private val characterService: Ch
             }
 
 
-            override fun onFailure(call: Call<List<Character>>, t: Throwable) {
+            override fun onFailure(call: Call<List<CharacterEntity>>, t: Throwable) {
                 // Hiba kezelése
                 println("Hiba történt a hálózati kérés során: ${t.message}")
             }
