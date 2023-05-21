@@ -6,8 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.gameofthronesguide.model.CharacterEntity
-import com.example.gameofthronesguide.network.CharacterService
-import javax.inject.Singleton
 
 @Dao
 interface CharacterDao {

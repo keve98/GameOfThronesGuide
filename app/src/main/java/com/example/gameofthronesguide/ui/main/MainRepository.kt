@@ -3,50 +3,34 @@ package com.example.gameofthronesguide.ui.main
 import com.example.gameofthronesguide.di.NetworkModule
 import com.example.gameofthronesguide.model.CharacterEntity
 import com.example.gameofthronesguide.network.CharacterService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainRepository /*@Inject constructor(private val characterService: CharacterService, private val characterDao: CharacterDao)*/ {
+class MainRepository  {
 
     private val characterService = NetworkModule.client.create(CharacterService::class.java)
 
     fun getCharacters():List<CharacterEntity>? {
-        var characters=characterService.getCharacters()
+
+        var characters : Call<List<CharacterEntity>> = characterService.getCharacters()
         var characterList : List<CharacterEntity>? = null
         characters.enqueue(object : Callback<List<CharacterEntity>> {
             override fun onResponse(call: Call<List<CharacterEntity>>, response: Response<List<CharacterEntity>>            ) {
-                if (response.isSuccessful) {
-                    val characters = response.body()
-                    characterList = response.body()
-                    // A karakterek további kezelése
-                    characters?.forEach { character ->
-                        println(character)
-                    }
-                } else {
-                    // Kezelés, ha a kérés nem sikerült
-                    println("Hiba történt a hálózati kérés során.")
-                }
+                characterList = response.body()
             }
 
 
             override fun onFailure(call: Call<List<CharacterEntity>>, t: Throwable) {
-                // Hiba kezelése
                 println("Hiba történt a hálózati kérés során: ${t.message}")
             }
         })
+        Thread.sleep(5000)
         return characterList
     }
 
 
 
-//    init {
-//        val characters = getCharacters()
-//        GlobalScope.launch {
-//        for(c in characters){
-//            var l = characterDao.insertCharacter(c)
-//            print(c.fullName)
-//            }
-//        }
-//    }
 }

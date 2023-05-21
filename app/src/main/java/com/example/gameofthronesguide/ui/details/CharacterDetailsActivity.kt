@@ -2,18 +2,13 @@ package com.example.gameofthronesguide.ui.details
 
 import android.app.Activity
 import android.os.Bundle
-import android.provider.Settings.Global
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gameofthronesguide.R
 import com.example.gameofthronesguide.di.PersistenceModule
-import com.example.gameofthronesguide.model.CharacterEntity
 import com.example.gameofthronesguide.persistence.AppDatabase
-import com.example.gameofthronesguide.persistence.CharacterDao
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.character_card.imageURL
-import kotlinx.coroutines.*
-import javax.inject.Inject
 
 class CharacterDetailsActivity : Activity() {
     lateinit var appDatabase: AppDatabase
@@ -27,7 +22,6 @@ class CharacterDetailsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         appDatabase = PersistenceModule.provideCharacterDatabase(applicationContext)
-        //characterDao = PersistenceModule.provideCharacterDao(appDatabase)
         var id = intent.getStringExtra(CHARACTER)
 
 

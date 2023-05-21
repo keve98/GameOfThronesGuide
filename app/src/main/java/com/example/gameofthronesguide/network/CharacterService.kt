@@ -15,6 +15,4 @@ interface CharacterService {
     @GET("characters/{id}")
     fun getCharacterDetails(@Path("id") id: String): Call<CharacterEntity>
 
-    @POST("characters")
-    fun addCharacter(@Body character: CharacterEntity)
 }
