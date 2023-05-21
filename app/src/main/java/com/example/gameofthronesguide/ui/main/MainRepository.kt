@@ -3,17 +3,11 @@ package com.example.gameofthronesguide.ui.main
 import com.example.gameofthronesguide.di.NetworkModule
 import com.example.gameofthronesguide.model.CharacterEntity
 import com.example.gameofthronesguide.network.CharacterService
-import com.example.gameofthronesguide.persistence.CharacterDao
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-import javax.inject.Inject
-
-class CharacterRepository /*@Inject constructor(private val characterService: CharacterService, private val characterDao: CharacterDao)*/ {
+class MainRepository /*@Inject constructor(private val characterService: CharacterService, private val characterDao: CharacterDao)*/ {
 
     private val characterService = NetworkModule.client.create(CharacterService::class.java)
 
@@ -43,6 +37,8 @@ class CharacterRepository /*@Inject constructor(private val characterService: Ch
         })
         return characterList
     }
+
+
 
 //    init {
 //        val characters = getCharacters()

@@ -26,15 +26,15 @@
         android:adjustViewBounds="true"
         android:id="@+id/imageURL" />
 
-    <TextView
-        android:id="@+id/character_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/cinzel_bold"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/character_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/got_font"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
 </androidx.appcompat.widget.LinearLayoutCompat>

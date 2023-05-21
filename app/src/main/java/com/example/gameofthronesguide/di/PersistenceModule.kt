@@ -17,7 +17,7 @@ object PersistenceModule {
     @Singleton
     @Provides
     fun provideCharacterDatabase( @ApplicationContext app: Context) =
-        Room.databaseBuilder(app, AppDatabase::class.java,"characters").build()
+        Room.databaseBuilder(app, AppDatabase::class.java,"GOT").allowMainThreadQueries().build()
 
     @Provides
     fun provideCharacterDao(appDatabase: AppDatabase): CharacterDao {

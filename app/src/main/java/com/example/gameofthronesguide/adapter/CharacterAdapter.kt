@@ -33,12 +33,8 @@ class CharacterAdapter(private val characters: List<CharacterEntity>, private va
             Glide.with(context)
                 .load(item.imageUrl)
                 .apply(options)
-                //.diskCacheStrategy(DiskCacheStrategy.ALL)
-                //.centerCrop()
-                //.dontAnimate()
                 .override(333, 500)
-                .into(imageURL)// To allow parallax effect
-                //.into(iv_bg)
+                .into(imageURL)
 
             setOnClickListener { listener(item) }
         }

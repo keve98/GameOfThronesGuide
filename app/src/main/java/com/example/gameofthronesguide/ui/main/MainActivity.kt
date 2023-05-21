@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel : MainViewModel by viewModels()
     private var adapter: CharacterAdapter?= null
 
+    @Inject
+    lateinit var characterDao: CharacterDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var characters = mainViewModel.getCharacters()
@@ -45,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         listRecyclerView!!.layoutManager = GridLayoutManager(this, 2)
-
+        setupDatabase(characters)
         adapter = CharacterAdapter(characters) {
             val intent = Intent(this, CharacterDetailsActivity::class.java)
-            //intent.putExtra(CharacterDetailsActivity.CHARACTER, it)
+            intent.putExtra(CharacterDetailsActivity.CHARACTER, it.id.toString())
             startActivity(intent)
         }
         listRecyclerView!!.adapter = adapter
@@ -56,10 +59,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun readJsonFileToList(filePath: String): List<CharacterEntity> {
-        val file = File(filePath)
         val json = assets.open(filePath).bufferedReader().use { it.readText() }
         val listType = object : TypeToken<List<CharacterEntity>>() {}.type
         return Gson().fromJson(json, listType)
+    }
+
+    fun setupDatabase(characters : List<CharacterEntity>){
+        GlobalScope.launch {
+            for(c in characters){
+                characterDao.insertCharacter(c);
+                print("INSERTED")
+            }
+        }
+
     }
 
     fun convertFlowToList(flow: Flow<List<CharacterEntity>>): List<CharacterEntity> {
