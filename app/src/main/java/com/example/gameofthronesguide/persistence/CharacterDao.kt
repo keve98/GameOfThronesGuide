@@ -1,19 +1,21 @@
 package com.example.gameofthronesguide.persistence
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.gameofthronesguide.model.CharacterEntity
 
 @Dao
 interface CharacterDao {
     @Query("SELECT * FROM CHARACTERS")
-    fun getAllCharacters(): LiveData<List<CharacterEntity>>
+    fun getAllCharacters(): List<CharacterEntity>
 
+    @Query("SELECT * FROM characters WHERE id = :id_")
+    fun getCharacter(id_: Long): CharacterEntity?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacter(characterEntity: CharacterEntity) : Long
 
     @Delete

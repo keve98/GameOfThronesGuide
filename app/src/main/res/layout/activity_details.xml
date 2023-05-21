@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:id="@+id/imageURL" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="First name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/got_font"/>
+            <TextView
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Unknown"
+                android:fontFamily="@font/got_font"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/got_font"
+                android:text="Last name"
+                />
+            <TextView
+                android:id="@+id/lastName"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Unknown"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Full name"
+                />
+            <TextView
+                android:id="@+id/fullName"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Unknown"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Title"
+                />
+            <TextView
+                android:id="@+id/title_"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Unknown"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Family"
+                />
+            <TextView
+                android:id="@+id/family"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/got_font"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Unknown"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

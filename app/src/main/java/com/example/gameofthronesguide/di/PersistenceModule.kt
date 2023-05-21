@@ -1,4 +1,4 @@
-package com.example.gameofthronesguide.network
+package com.example.gameofthronesguide.di
 
 import android.content.Context
 import androidx.room.Room
@@ -16,16 +16,11 @@ import javax.inject.Singleton
 object PersistenceModule {
     @Singleton
     @Provides
-    fun provideCharacterDatabase(
-        @ApplicationContext app: Context
-    ) = Room.databaseBuilder(
-        app,
-        AppDatabase::class.java,
-        "characters"
-    ).build()
+    fun provideCharacterDatabase( @ApplicationContext app: Context) =
+        Room.databaseBuilder(app, AppDatabase::class.java,"GOT").allowMainThreadQueries().build()
 
     @Provides
-    fun provideCharacterDao(appdatabase: AppDatabase): CharacterDao {
-        return appdatabase.characterDao()
+    fun provideCharacterDao(appDatabase: AppDatabase): CharacterDao {
+        return appDatabase.characterDao()
     }
 }

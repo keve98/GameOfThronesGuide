@@ -1,10 +1,13 @@
 package com.example.gameofthronesguide.ui.main
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.gameofthronesguide.model.CharacterModel
+import com.example.gameofthronesguide.model.CharacterEntity
 
-class MainViewModel(private val characterRepository: CharacterRepository): ViewModel() {
-    val characters: LiveData<List<CharacterModel>>
-        get() = characterRepository.getCharacters()
+class MainViewModel : ViewModel() {
+
+    private val mainRepository : MainRepository = MainRepository()
+
+    fun getCharacters() : List<CharacterEntity>?{
+       return mainRepository.getCharacters()
+    }
 }
