@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "544374501412",
+    "project_id": "gameofthronesguide-b40a1",
+    "storage_bucket": "gameofthronesguide-b40a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544374501412:android:922ebe640dc02faf3268b1",
+        "android_client_info": {
+          "package_name": "com.example.gameofthronesguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544374501412-fcg0d2ac5jlmvejf3ik7g0rncv9db43s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAki60BT4_ql72Iy62A48AqtabEBpj4BTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544374501412-fcg0d2ac5jlmvejf3ik7g0rncv9db43s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

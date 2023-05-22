@@ -28,7 +28,6 @@ class UnitTest {
 
     @Before
     fun setup() {
-        // Inicializálás a tesztelendő karakterszolgáltatás példányával
         characterService = createCharacterService()
     }
 
@@ -85,7 +84,7 @@ class UnitTest {
         Thread.sleep(2000)
 
         Assert.assertNotNull(character)
-        Assert.assertEquals(characterId, character!!.id)
+        Assert.assertEquals(characterId, character!!.id.toString())
     }
 
     private fun createCharacterService(): CharacterService {

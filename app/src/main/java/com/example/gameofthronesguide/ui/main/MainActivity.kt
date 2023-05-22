@@ -4,12 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.gameofthronesguide.R
 import com.example.gameofthronesguide.adapter.CharacterAdapter
+import com.example.gameofthronesguide.analytics.AnalyticsApplication
 import com.example.gameofthronesguide.model.CharacterEntity
 import com.example.gameofthronesguide.persistence.CharacterDao
 import com.example.gameofthronesguide.ui.details.CharacterDetailsActivity
+import com.google.android.gms.analytics.Tracker
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.lifecycle.lifecycleScope
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,11 +33,17 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var characterDao: CharacterDao
-
+    private lateinit var analytics: FirebaseAnalytics
+    private var mTracker: Tracker? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        analytics = Firebase.analytics
+        val application = application as AnalyticsApplication
+        mTracker = application.defaultTracker
+
         var characters : List<CharacterEntity>? = null
         lifecycleScope.launch{
             characters = mainViewModel.getCharacters()
@@ -51,7 +63,14 @@ class MainActivity : AppCompatActivity() {
         }
         listRecyclerView!!.adapter = adapter
 
+
+        crashButton.text = "Test Crash"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
     }
+
+
 
     fun readJsonFileToList(filePath: String): List<CharacterEntity> {
         val json = assets.open(filePath).bufferedReader().use { it.readText() }
@@ -68,5 +87,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 }
